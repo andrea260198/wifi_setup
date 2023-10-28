@@ -1,1 +1,1 @@
-# wifi_setup
+# Wifi setup application
