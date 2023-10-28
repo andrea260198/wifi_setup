@@ -1,22 +1,20 @@
+#pragma once
+
 #include <QObject>
-
-
-struct WifiProperties
-{
-	QString password;
-	bool state;
-};
+#include <QMap>
+#include "Msg.h"
 
 
 class Server : public QObject
 {
 	Q_OBJECT
+
 public:
 	Server();
 	
-	getFromJson();
+    QMap<QString, WifiProperties> getFromJson(QString file);
 	
-private slots:
+public slots:
 	void receiveMsgFromClient(Msg msg);
 	void sendWifiList();
 
@@ -24,5 +22,5 @@ signals:
 	void sendMsgToClient(Msg);
 	
 private:
-	QMap<QString, WifiProperties> wifiMap;  // Maps wifi properties (password, state) to every wifi name
+    QMap<QString, WifiProperties> wifiMap;  // Maps wifi properties (password, state) to every wifi name
 };

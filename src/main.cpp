@@ -1,23 +1,23 @@
 #include <QApplication>
-#include <QQmlApplicationEngine>
+//#include <QQmlApplicationEngine>
 #include "Server.h"
 #include "Client.h"
 
 
 
-int main(argc, **argv) 
+int main(int argc, char **argv)
 {
 	QApplication app(argc, argv);
 	
-	QQmlApplicationEngine engine("main.qml");
+    //QQmlApplicationEngine engine("main.qml");
 	
 	Server server;
 	
-	Client client;
-	
-	QObject::connect(&server, &sendMsgToClient, &client, &receiveMsgFromServer);
-	QObject::connect(&client, &sendMsgToServer, &server, &receiveMsgFromClient);
-	QObject::connect(&client, &askWifiList, &server, &sendWifiList);
+    Client client;
+
+    QObject::connect(&server, &Server::sendMsgToClient, &client, &Client::receiveMsgFromServer);
+    QObject::connect(&client, &Client::sendMsgToServer, &server, &Server::receiveMsgFromClient);
+    QObject::connect(&client, &Client::askWifiList, &server, &Server::sendWifiList);
 	
 	return app.exec();
 }

@@ -1,10 +1,15 @@
 #include "Server.h"
 
 
-Sever::Server() 
+Server::Server()
 {
-	wifiPasswordMap = getFromJson("input.json");
-	wifiOpenMap
+    wifiMap = getFromJson("input.json");
+}
+
+
+QMap<QString, WifiProperties> Server::getFromJson(QString file)
+{
+    return wifiMap;
 }
 
 
@@ -25,7 +30,7 @@ void Server::receiveMsgFromClient(Msg msg)  // Msg with wifi and password
 
 void Server::sendWifiList()
 {
-	for (const auto &wifi : wifiMap)
+    for (const auto &wifi : wifiMap.keys())
 	{
 		Msg msg;
 		msg.wifi = wifi;

@@ -9,12 +9,13 @@ QT += widgets
 DESTDIR = ../bin
 
 
-HEADERS =
+HEADERS = \
 	Client.h \
-	Server.h
+	Server.h \
+	Msg.h
 
 
-SOURCES =
+SOURCES = \
 	main.cpp \
 	Client.cpp \
 	Server.cpp
