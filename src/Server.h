@@ -14,7 +14,7 @@ class Server : public QObject
 public:
     Server();
 
-    std::vector<Wifi> getFromJson(QString filename);
+    std::vector<Wifi> getWifiListFromJson(QString filename);
 	
 public slots:
     void receiveMsgFromClient(Wifi msg);

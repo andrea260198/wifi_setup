@@ -1,21 +1,62 @@
+#include <QDebug>
+#include <QFile>
+#include <QByteArray>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 #include "Server.h"
 
 
 Server::Server()
 {
-    wifiList = getFromJson("input.json");
+    wifiList = getWifiListFromJson(":/json/input.json");
 }
 
 
-std::vector<Wifi> Server::getFromJson(QString filename)
+//std::vector<Wifi> Server::getFromJson(QString filename)
+//{
+//    decltype(wifiList) temp;
+//
+//    temp.push_back(Wifi{.id = "wifi1", .auth = "123", .status=Wifi::INIT});
+//    temp.push_back(Wifi{.id = "wifi2", .auth = "456", .status=Wifi::INIT});
+//
+//    return temp;
+//}
+
+
+
+std::vector<Wifi> Server::getWifiListFromJson(QString filename)
 {
-    // TODO
-    decltype(wifiList) temp;
+    std::vector<Wifi> tempList;
 
-    temp.push_back(Wifi{.id = "wifi1", .auth = "123", .status=Wifi::INIT});
-    temp.push_back(Wifi{.id = "wifi2", .auth = "456", .status=Wifi::INIT});
+    QFile file(filename);  // File exists
 
-    return temp;
+    file.open(QIODevice::ReadOnly);//QIODevice::ReadOnly | QIODevice::Text);  // File opened
+
+    QString jsonData = file.readAll();
+
+    qDebug() << jsonData.toUtf8();
+
+    file.close();
+
+    QJsonDocument document = QJsonDocument::fromJson(jsonData.toUtf8());
+
+    QJsonObject object = document.object();
+
+    QJsonValue value = object.value("wifi_params");
+
+    QJsonArray array = value.toArray();
+
+    for (const QJsonValue &val : array)
+    {
+        Wifi wifi = {.id = val.toObject().value("id").toString(),
+                     .auth = val.toObject().value("auth").toString(),
+                     .status = Wifi::INIT};
+
+        tempList.push_back(wifi);
+    }
+
+    return tempList;
 }
 
 

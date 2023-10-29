@@ -19,3 +19,6 @@ SOURCES = \
 	main.cpp \
 	Client.cpp \
 	Server.cpp
+
+
+RESOURCES = myresources.qrc
