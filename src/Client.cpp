@@ -3,17 +3,42 @@
 
 Client::Client()
 {
-	emit askWifiList();
+
 }
 
 
-void Client::receiveMsgFromServer(Msg msg)
+void Client::connectToServer()
 {
-	// TODO: Uncomment
-    //if (msg.wifi is in wifiMap) {
-    //	wifiMap[msg.wifi].state = msg.state;
-    //} else {
-    //	// new wifi
-    //	wifiMap[msf.wifi] = {.password = "", .state = true};
-    //}
+    emit askWifiList();
+}
+
+
+void Client::receiveMsgFromServer(Wifi msg)
+{
+    auto pWifi = std::find_if(wifiList.begin(), wifiList.end(), [&](Wifi wifi){return wifi.id == msg.id;});
+
+    if (pWifi == wifiList.end())
+    {
+        // New wifi
+        wifiList.push_back(msg);
+    }
+    else
+    {
+        // Old wifi
+        pWifi->status = msg.status;
+    }
+
+    debug();
+}
+
+
+void Client::debug()
+{
+    for (const auto &wifi : wifiList)
+    {
+        std::cout << "id: "     << wifi.id.toStdString()   << std::endl
+                  << "auth: "   << wifi.auth.toStdString() << std::endl
+                  << "status: " << (int)wifi.status        << std::endl;
+        std::cout << std::endl;
+    }
 }

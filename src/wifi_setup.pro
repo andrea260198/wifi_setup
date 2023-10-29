@@ -12,7 +12,7 @@ DESTDIR = ../bin
 HEADERS = \
 	Client.h \
 	Server.h \
-	Msg.h
+        Wifi.h
 
 
 SOURCES = \

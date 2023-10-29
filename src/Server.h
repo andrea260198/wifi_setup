@@ -2,7 +2,9 @@
 
 #include <QObject>
 #include <QMap>
-#include "Msg.h"
+#include <vector>
+#include <algorithm>
+#include "Wifi.h"
 
 
 class Server : public QObject
@@ -10,17 +12,17 @@ class Server : public QObject
 	Q_OBJECT
 
 public:
-	Server();
-	
-    QMap<QString, WifiProperties> getFromJson(QString file);
+    Server();
+
+    std::vector<Wifi> getFromJson(QString filename);
 	
 public slots:
-	void receiveMsgFromClient(Msg msg);
+    void receiveMsgFromClient(Wifi msg);
 	void sendWifiList();
 
 signals:
-	void sendMsgToClient(Msg);
+    void sendMsgToClient(Wifi msg);
 	
 private:
-    QMap<QString, WifiProperties> wifiMap;  // Maps wifi properties (password, state) to every wifi name
+    std::vector<Wifi> wifiList;  // Maps wifi properties (password, state) to every wifi name
 };

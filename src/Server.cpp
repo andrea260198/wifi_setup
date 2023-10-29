@@ -3,38 +3,59 @@
 
 Server::Server()
 {
-    wifiMap = getFromJson("input.json");
+    wifiList = getFromJson("input.json");
 }
 
 
-QMap<QString, WifiProperties> Server::getFromJson(QString file)
+std::vector<Wifi> Server::getFromJson(QString filename)
 {
-    return wifiMap;
+    // TODO
+    decltype(wifiList) temp;
+
+    temp.push_back(Wifi{.id = "wifi1", .auth = "123", .status=Wifi::INIT});
+    temp.push_back(Wifi{.id = "wifi2", .auth = "456", .status=Wifi::INIT});
+
+    return temp;
 }
 
 
-void Server::receiveMsgFromClient(Msg msg)  // Msg with wifi and password
+void Server::receiveMsgFromClient(Wifi msg)
 {
-	if (wifiMap[msg.wifi].password == msg.password)
-	{
-		wifiMap[msg.wifi].state = true;
-		
-		Msg answer = msg;
-		answer.wifi = msg.wifi;
-		answer.state = true;
-		
-		emit sendMsgToClient(answer);
-	}
+    auto pWifi = std::find_if(wifiList.begin(), wifiList.end(), [&](Wifi wifi){return wifi.id == msg.id;});
+
+    if (pWifi != wifiList.end())
+    {
+        if (pWifi->auth == msg.auth)
+        {
+            pWifi->status = Wifi::CONN_SUCC;
+
+            Wifi answer = msg;
+            answer.id = msg.id;
+            answer.status = Wifi::CONN_SUCC;
+
+            emit sendMsgToClient(answer);
+        }
+        else
+        {
+            pWifi->status = Wifi::CONN_FAIL;
+
+            Wifi answer = msg;
+            answer.id = msg.id;
+            answer.status = Wifi::CONN_FAIL;
+
+            emit sendMsgToClient(answer);
+        }
+    }
 }
 
 
 void Server::sendWifiList()
 {
-    for (const auto &wifi : wifiMap.keys())
+    for (const auto &wifi : wifiList)
 	{
-		Msg msg;
-		msg.wifi = wifi;
-		msg.state = wifiMap[wifi].state;
-		emit sendMsgToClient(msg);
+        Wifi msg;
+        msg.id = wifi.id;
+        msg.status = wifi.status;
+        emit sendMsgToClient(msg);
 	}
 }
