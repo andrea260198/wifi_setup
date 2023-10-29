@@ -1,5 +1,5 @@
 #include <QApplication>
-//#include <QQmlApplicationEngine>
+#include <QQmlApplicationEngine>
 #include "Server.h"
 #include "Client.h"
 
@@ -7,9 +7,11 @@
 
 int main(int argc, char **argv)
 {
-	QApplication app(argc, argv);
-	
-    //QQmlApplicationEngine engine("main.qml");
+    QGuiApplication app(argc, argv);
+
+    QQmlApplicationEngine engine;
+
+    engine.load(":/qml/main.qml");
 	
 	Server server;
 	

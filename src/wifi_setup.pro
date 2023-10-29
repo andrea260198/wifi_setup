@@ -5,6 +5,7 @@ QT_VERSION = 5
 CONFIG += c++17
 
 QT += widgets
+QT += quick
 
 DESTDIR = ../bin
 
