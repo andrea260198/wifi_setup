@@ -32,6 +32,25 @@ void Client::receiveMsgFromServer(Wifi msg)
 }
 
 
+QStringList Client::readWifiIds() const
+{
+    QStringList tempList;
+
+    for (const auto &wifi : wifiList)
+    {
+        tempList.push_back(wifi.id);
+    }
+
+    return tempList;
+}
+
+
+int Client::n() const
+{
+    return 1234;
+}
+
+
 void Client::debug()
 {
     for (const auto &wifi : wifiList)

@@ -2,6 +2,7 @@
 
 #include <QObject>
 #include <QMap>
+#include <QStringList>
 #include <vector>
 #include <algorithm>
 #include <iostream>
@@ -12,11 +13,17 @@ class Client : public QObject
 {
 	Q_OBJECT
 
+    Q_PROPERTY(QStringList wifiList READ readWifiIds NOTIFY changeWifiList)
+
 public:
+    int n() const;
+
     Client();
 
     void connectToServer();
+    QStringList readWifiIds() const;
     void debug();
+
 
 public slots:
     void receiveMsgFromServer(Wifi msg);
@@ -24,6 +31,7 @@ public slots:
 signals:
     void sendMsgToServer(Wifi msg);
     void askWifiList();
+    void changeWifiList();
 
 private:
     std::vector<Wifi> wifiList;
