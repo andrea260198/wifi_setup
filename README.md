@@ -2,11 +2,13 @@
 
 
 ## Goal
+
 Develop a Client-Server verification/connection application ( e.g. a WiFi Setup application).
 The end-users of such app can possibly use devices with varying screen configurations.
 
 
 ## Description
+
 The goal of this exercise is the development of a simple Qt application that simulates the
 behavior of a Client-Server verification/connection system.
 A simple scalable UI should be developed for the inputs on the client side. There is no need for
