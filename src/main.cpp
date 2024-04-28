@@ -29,5 +29,5 @@ int main(int argc, char **argv)
 
     client.connectToServer();
 
-	return app.exec();
+    return app.exec();
 }
