@@ -36,8 +36,30 @@ Window {
             onClicked: client.buttonPressed(comboBox.currentText, textField.text)
         }
 
+
         Label {
-            text: client.wifiStatusMap[comboBox.currentText]
+            function translateWifiStatus(statusInt) {
+                console.log("Hello world!!");
+                console.log(statusInt);
+                var statusString;
+                switch(statusInt) {
+                case 0:
+                    statusString = "Init";
+                    break;
+                case 1:
+                    statusString = "Success";
+                    break;
+                case 2:
+                    statusString = "Failed";
+                    break;
+                default:
+                    statusString = "None";
+                }
+
+                return statusString;
+            }
+
+            text: translateWifiStatus(client.wifiStatusMap[comboBox.currentText])
         }
     }
 }
