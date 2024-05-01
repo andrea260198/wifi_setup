@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
+import QtQuick.Layouts 2.15
 
 
 Window {
@@ -9,7 +10,28 @@ Window {
     visible: true
     title: qsTr("Hello World")
 
-    ComboBox {
-        model: client.wifiList
+    ColumnLayout {
+        spacing: 2
+
+        Label {
+            text: "Wifi"
+        }
+
+        ComboBox {
+            model: client.wifiList
+        }
+
+        Label {
+            text: "Password"
+        }
+
+        TextField {
+            placeholderText: "Insert password"
+        }
+
+        Button {
+            text: "Confirm"
+            //onClicked: client.se
+        }
     }
 }
