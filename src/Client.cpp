@@ -47,6 +47,20 @@ QStringList Client::readWifiIds() const
 }
 
 
+wifiStatusMap_t Client::readWifiStatusMap() const
+{
+    wifiStatusMap_t tempMap;
+
+    for (const auto &wifi : wifiList)
+    {
+        QVariant qv(static_cast<int>(wifi.status));
+        tempMap[wifi.id] = qv;
+    }
+
+    return tempMap;
+}
+
+
 void Client::debug()
 {
     for (const auto &wifi : wifiList)

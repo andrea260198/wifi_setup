@@ -35,5 +35,9 @@ Window {
             text: "Confirm"
             onClicked: client.buttonPressed(comboBox.currentText, textField.text)
         }
+
+        Label {
+            text: client.wifiStatusMap[comboBox.currentText]
+        }
     }
 }
