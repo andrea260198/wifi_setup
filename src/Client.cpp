@@ -57,3 +57,15 @@ void Client::debug()
         std::cout << std::endl;
     }
 }
+
+
+void Client::buttonPressed(const QString &wifi, const QString &password)
+{
+    std::cout << "METHOD CALLED FROM QML : " << wifi.toStdString()
+              << " -- " << password.toStdString() << std::endl;
+    Wifi msg = {
+        .id = wifi,
+        .auth = password
+    };
+    Q_EMIT sendMsgToServer(msg);
+}

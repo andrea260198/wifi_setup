@@ -30,6 +30,8 @@ public:
     Q_SIGNAL void askWifiList();
     Q_SIGNAL void changeWifiList();
 
+    Q_INVOKABLE void buttonPressed(const QString &wifi, const QString &password);
+
 private:
     std::vector<Wifi> wifiList;
 };

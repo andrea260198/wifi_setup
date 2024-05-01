@@ -18,6 +18,7 @@ Window {
         }
 
         ComboBox {
+            id: comboBox
             model: client.wifiList
         }
 
@@ -26,12 +27,13 @@ Window {
         }
 
         TextField {
+            id: textField
             placeholderText: "Insert password"
         }
 
         Button {
             text: "Confirm"
-            //onClicked: client.se
+            onClicked: client.buttonPressed(comboBox.currentText, textField.text)
         }
     }
 }
