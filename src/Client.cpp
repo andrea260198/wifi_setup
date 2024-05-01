@@ -28,6 +28,8 @@ void Client::receiveMsgFromServer(Wifi msg)
         pWifi->status = msg.status;
     }
 
+    emit changeWifiList();
+
     debug();
 }
 
