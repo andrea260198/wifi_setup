@@ -28,7 +28,7 @@ void Client::receiveMsgFromServer(Wifi msg)
         pWifi->status = msg.status;
     }
 
-    emit changeWifiList();
+    Q_EMIT changeWifiList();
 
     debug();
 }
@@ -44,12 +44,6 @@ QStringList Client::readWifiIds() const
     }
 
     return tempList;
-}
-
-
-int Client::n() const
-{
-    return 1234;
 }
 
 

@@ -16,8 +16,6 @@ class Client : public QObject
     Q_PROPERTY(QStringList wifiList READ readWifiIds NOTIFY changeWifiList)
 
 public:
-    int n() const;
-
     Client();
 
     void connectToServer();
@@ -25,13 +23,12 @@ public:
     void debug();
 
 
-public slots:
-    void receiveMsgFromServer(Wifi msg);
+public:
+    Q_SLOT void receiveMsgFromServer(Wifi msg);
 
-signals:
-    void sendMsgToServer(Wifi msg);
-    void askWifiList();
-    void changeWifiList();
+    Q_SIGNAL void sendMsgToServer(Wifi msg);
+    Q_SIGNAL void askWifiList();
+    Q_SIGNAL void changeWifiList();
 
 private:
     std::vector<Wifi> wifiList;
