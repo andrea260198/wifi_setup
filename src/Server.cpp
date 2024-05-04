@@ -74,7 +74,7 @@ void Server::receiveMsgFromClient(Wifi msg)
             answer.id = msg.id;
             answer.status = Wifi::CONN_SUCC;
 
-            emit sendMsgToClient(answer);
+            Q_EMIT sendMsgToClient(answer);
         }
         else
         {
@@ -84,7 +84,7 @@ void Server::receiveMsgFromClient(Wifi msg)
             answer.id = msg.id;
             answer.status = Wifi::CONN_FAIL;
 
-            emit sendMsgToClient(answer);
+            Q_EMIT sendMsgToClient(answer);
         }
     }
 }
@@ -97,6 +97,6 @@ void Server::sendWifiList()
         Wifi msg;
         msg.id = wifi.id;
         msg.status = wifi.status;
-        emit sendMsgToClient(msg);
+        Q_EMIT sendMsgToClient(msg);
 	}
 }

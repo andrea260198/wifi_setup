@@ -16,12 +16,10 @@ public:
 
     std::vector<Wifi> getWifiListFromJson(QString filename);
 	
-public slots:
-    void receiveMsgFromClient(Wifi msg);
-	void sendWifiList();
-
-signals:
-    void sendMsgToClient(Wifi msg);
+public:
+    Q_SLOT void receiveMsgFromClient(Wifi msg);
+    Q_SLOT void sendWifiList();
+    Q_SIGNAL void sendMsgToClient(Wifi msg);
 	
 private:
     std::vector<Wifi> wifiList;  // Maps wifi properties (password, state) to every wifi name
