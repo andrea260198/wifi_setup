@@ -29,6 +29,7 @@ Window {
         TextField {
             id: textField
             placeholderText: "Insert password"
+            echoMode: TextInput.Password
         }
 
         Button {
