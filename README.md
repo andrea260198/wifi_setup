@@ -25,6 +25,6 @@ All coding will be done in Qt5.
 
 ## Results
 
-The following image is a screenshot of the application GUI.
+The following image is a screenshot of the client GUI.
 
 ![image](img/screenshot.png)
