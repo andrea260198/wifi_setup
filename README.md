@@ -21,3 +21,10 @@ Client side. The user should be able to give inputs and attempt connection with 
 and the UI should be updated based on the failure/success. The server settings will be given in
 a separate JSON file that will live in the same directory of the main app.
 All coding will be done in Qt5.
+
+
+## Results
+
+The following image is a screenshot of the application GUI.
+
+![image](img/screenshot.png)
