@@ -5,62 +5,80 @@ import QtQuick.Layouts 2.15
 
 
 Window {
-    width: 640
-    height: 480
+    property int mWidth: 200
+    property int mHeight: 200
+
+    width: mWidth
+    height: mHeight
+    minimumWidth: mWidth
+    minimumHeight: mHeight
+    maximumWidth: mWidth
+    maximumHeight: mHeight
     visible: true
-    title: qsTr("Hello World")
+    title: "Hello World"
 
     ColumnLayout {
+        anchors.fill: parent
         spacing: 2
 
         Label {
             text: "Wifi"
+            Layout.alignment: Qt.AlignHCenter
         }
 
         ComboBox {
             id: comboBox
             model: client.wifiList
+            Layout.alignment: Qt.AlignHCenter
         }
 
         Label {
             text: "Password"
+            Layout.alignment: Qt.AlignHCenter
         }
 
         TextField {
             id: textField
             placeholderText: "Insert password"
             echoMode: TextInput.Password
+            Layout.alignment: Qt.AlignHCenter
+            Keys.onEnterPressed: client.buttonPressed(comboBox.currentText, textField.text)
         }
 
         Button {
             text: "Confirm"
             onClicked: client.buttonPressed(comboBox.currentText, textField.text)
+            Layout.alignment: Qt.AlignHCenter
         }
 
 
-        Label {
+        Rectangle {
+            width: 100
+            height: 50
+            Layout.alignment: Qt.AlignHCenter
+
             function translateWifiStatus(statusInt) {
                 console.log("Hello world!!");
                 console.log(statusInt);
                 var statusString;
                 switch(statusInt) {
                 case 0:
-                    statusString = "Init";
+                    statusString = "grey"; //"Init";
                     break;
                 case 1:
-                    statusString = "Success";
+                    statusString = "green"; //"Success";
                     break;
                 case 2:
-                    statusString = "Failed";
+                    statusString = "red"; //"Failed";
                     break;
                 default:
-                    statusString = "None";
+                    statusString = "blue"; //"None";
                 }
 
                 return statusString;
             }
 
-            text: translateWifiStatus(client.wifiStatusMap[comboBox.currentText])
+            color: translateWifiStatus(client.wifiStatusMap[comboBox.currentText])
         }
     }
 }
