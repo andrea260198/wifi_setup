@@ -2,5 +2,6 @@
 	<qresource>
 		<file>json/input.json</file>
 		<file>qml/main.qml</file>
+        <file>qml/MainWindow.qml</file>
 	</qresource>
 </RCC>
