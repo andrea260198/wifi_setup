@@ -7,7 +7,24 @@ import QtQuick.Layouts 2.15
 MainWindow {
     ColumnLayout {
         anchors.fill: parent
-        spacing: 2
+
+        Rectangle {
+            Layout.alignment: Qt.AlignRight | Qt.AlignTop
+            width: 40
+            height: 20
+            color: "red"
+
+            Label {
+                text: "X"
+                color: "white"
+                horizontalAlignment: Text.AlignHCenter
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: Qt.quit()
+            }
+        }
 
         Label {
             text: "Wifi"

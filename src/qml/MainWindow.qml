@@ -6,7 +6,7 @@ import QtQuick.Layouts 2.15
 
 Window {
     property int mWidth: 200
-    property int mHeight: 200
+    property int mHeight: 250
 
     id: mainWindow
     flags: Qt.FramelessWindowHint
@@ -18,6 +18,7 @@ Window {
     maximumHeight: mHeight
     visible: true
     title: "Hello World"
+    color: "#6495ED"
 
     MouseArea {
         anchors.fill: parent;
